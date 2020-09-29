@@ -2,8 +2,10 @@
 //  ViewController.swift
 //  Calculator
 //
-//  Created by legion-11 on 28.09.2020.
-//  Copyright © 2020 legion-11. All rights reserved.
+//  Created by Dmytro Andriichuk
+//  Student number 301132978
+//  on 26.09.2020.
+//
 //
 
 import UIKit
