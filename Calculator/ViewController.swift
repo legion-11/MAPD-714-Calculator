@@ -101,10 +101,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pressEquals(_ sender: UIButton) {
-        
+        if (["✕", "%", "+", "–", "÷"].contains(splitedInput.last)){
+            splitedInput.removeLast();
+        }
+        var result = Double(splitedInput[0]);
+        for i in stride(from: 2, to: splitedInput.count, by: 2) {
+            let tmp = calculate(Double(result!), Double(splitedInput[i])!, splitedInput[i-1]);
+            if !(tmp == "error"){
+                result! = Double(tmp)!;
+                print(i, result!)
+            }else{
+                print("error");
+                resultLable.text! = "error";
+            }
+        }
+        print(result!)
+        resultLable.text! = String(result!);
     }
     
-    @IBAction func pressAllClear(_ sender: Any) {
+    @IBAction func pressAllClear(_ sender: UIButton) {
         splitedInput = ["0"]
         inputLable.text! = splitedInput.joined();
     }

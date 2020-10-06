@@ -206,7 +206,7 @@
                                     <color key="titleColor" red="0.94901960780000005" green="0.35686274509999999" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="allClear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WDC-El-Diy"/>
+                                    <action selector="pressAllClear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c8k-us-JQo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d1D-c3-bCg">
