@@ -43,6 +43,18 @@ class ViewController: UIViewController {
             return "error"
         }
     }
+    
+    /*
+     format result to only 9 digits after point, without zeros that gives siple format: "%.9f"
+     */
+    func formatResult(_ res: Double) -> String{
+        var splitRes =  String(format: "%.9f", res).split(separator:".")
+        if Int(splitRes[1]) == 0{
+            splitRes.removeLast();
+        }
+        return splitRes.joined(separator:".")
+    }
+    
     /*
      compound calculation in for loop by reasigning result variable with new calculation
      between result and next operand in array
@@ -64,7 +76,7 @@ class ViewController: UIViewController {
             }
         }
         
-        resultLable.text! = "=" + String(format: "%.9f",result!);
+        resultLable.text! = "=" + formatResult(result!);
     }
     
     /*
