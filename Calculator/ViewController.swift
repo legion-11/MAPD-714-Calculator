@@ -45,17 +45,6 @@ class ViewController: UIViewController {
     }
     
     /*
-     format result to only 9 digits after point, without zeros that gives siple format: "%.9f"
-     */
-    func formatResult(_ res: Double) -> String{
-        var splitRes =  String(format: "%.9f", res).split(separator:".")
-        if Int(splitRes[1]) == 0{
-            splitRes.removeLast();
-        }
-        return splitRes.joined(separator:".")
-    }
-    
-    /*
      compound calculation in for loop by reasigning result variable with new calculation
      between result and next operand in array
      example splitedInput = ["1",+,"2",-,"3"]
@@ -75,8 +64,15 @@ class ViewController: UIViewController {
                 return
             }
         }
-        
-        resultLable.text! = "=" + formatResult(result!);
+        if (String(result!).contains("e")){
+            resultLable.text! = "=" + String(result!);
+            return
+        }
+        //formate to natural form
+        let strRes = String(format: "%.9f", result!);
+        var zeroTrunc = strRes.replacingOccurrences(of: "0*$", with: "", options: .regularExpression);
+        if (zeroTrunc.last == "."){zeroTrunc.removeLast()}
+        resultLable.text! = "=" + zeroTrunc;
     }
     
     /*
@@ -141,11 +137,14 @@ class ViewController: UIViewController {
     @IBAction func pressBackspace(_ sender: UIButton) {
         if (splitedInput.last!.count == 1){
             splitedInput.removeLast();
-            if (splitedInput.count == 0){
-                splitedInput.append("0");
-            }
         }else{
             splitedInput[splitedInput.endIndex-1].removeLast();
+            if (splitedInput[splitedInput.endIndex-1] == "-"){
+                splitedInput.removeLast();
+            }
+        }
+        if (splitedInput.count == 0){
+            splitedInput.append("0");
         }
         inputLable.text! = splitedInput.joined();
         calculateFull();
@@ -169,12 +168,14 @@ class ViewController: UIViewController {
     
     /*
      listener to = (equals) button
-     rewrite splitedInput with text of resultLable
+     rewrite splitedInput with text of resultLable if it is in normal form
      */
     @IBAction func pressEquals(_ sender: UIButton) {
         //remove = (equals) char
         var resultStr = resultLable.text!;
         resultStr.removeFirst()
+        
+        if (resultStr.contains("e")){return}
         
         splitedInput = [resultStr];
         inputLable.text! = splitedInput.joined();
