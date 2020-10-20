@@ -11,7 +11,7 @@
 //
 
 import UIKit
-
+//layer.cornerRadius   F25B23
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
